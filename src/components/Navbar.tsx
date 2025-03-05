@@ -6,23 +6,33 @@ import { syncUser } from "@/actions/user.action";
 
 async function Navbar() {
   const user = await currentUser();
-  if (user) await syncUser(); // POST
+  if (user) await syncUser();
 
   return (
-    <nav className="sticky top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-primary font-mono tracking-wider">
-              Socially
-            </Link>
-          </div>
+    <nav className="sticky top-0 w-full bg-white/80 backdrop-blur-lg shadow-md z-50 border-b">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold text-primary tracking-wide hover:opacity-80">
+          Socially
+        </Link>
 
-          <DesktopNavbar />
-          <MobileNavbar />
+        {/* Search Bar */}
+        <div className="flex-1 mx-6">
+          <input
+            type="text"
+            placeholder="Search users..."
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+          />
         </div>
+
+        {/* Navigation Desktop */}
+        <DesktopNavbar />
+
+        {/* Navigation Mobile */}
+        <MobileNavbar />
       </div>
     </nav>
   );
 }
+
 export default Navbar;
